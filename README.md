@@ -4,7 +4,7 @@ Aufruf von Selenium Script nodejs (CHM)
 nodejs rbit_runAll-rbitq.js
 
 # GIT
-## Für alle git Commands muss man im Ordner des Projektes sein
+### Für alle git Commands muss man im Ordner des Projektes sein
 Update from Repository
 ```
 git pull
