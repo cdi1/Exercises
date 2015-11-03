@@ -23,6 +23,7 @@
   "homepage": "https://github.com/cdi1/Exercises#readme",
   "dependencies": {
     "d3": "^3.5.6",
+    "dc": "^1.7.5",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "webdriverio": "^3.2.6"

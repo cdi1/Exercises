@@ -15,6 +15,11 @@ npm install (install dependencies)
 node selenium-scripts/script1.js
 ```
 
+# Start Webserver
+```
+node server.js
+```
+
 
 # GIT
 ### Für alle git Commands muss man im Ordner des Projektes sein

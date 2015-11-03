@@ -3,53 +3,69 @@
   <head>
     <meta charset="UTF-8">
     <title>dni app</title>
+    <link rel="stylesheet" type="text/css" href="/node_modules/dc/dc.css"/>
     <script src="/node_modules/d3/d3.min.js" type="text/javascript"></script>
+    <script src="/node_modules/dc/node_modules/crossfilter/crossfilter.min.js" type="text/javascript"></script>
+    <script src="/node_modules/dc/dc.min.js" type="text/javascript"></script>
   </head>
   <body>
+    <h1>AQA Testmanagment Visuals </h1>
+    <div id="chart-ring-year"></div>
+    <div id="chart-hist-spend"></div>
+    <div id="chart-row-spenders"></div>
     <script>
-      var width = 960,
-      height = 500,
-      radius = Math.min(width, height) / 2;
+      var yearRingChart   = dc.pieChart("#chart-ring-year"),
+      spendHistChart  = dc.barChart("#chart-hist-spend"),
+      spenderRowChart = dc.rowChart("#chart-row-spenders");
 
-      var color = d3.scale.ordinal()
-      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+      // use static or load via d3.csv("spendData.csv", function(error, spendData) {/* do stuff */});
+      var spendData = [
+        {Name: 'Mr A', Spent: '$40', Year: 2011},
+        {Name: 'Mr B', Spent: '$10', Year: 2011},
+        {Name: 'Mr C', Spent: '$40', Year: 2011},
+        {Name: 'Mr A', Spent: '$70', Year: 2012},
+        {Name: 'Mr B', Spent: '$20', Year: 2012},
+        {Name: 'Mr B', Spent: '$50', Year: 2013},
+        {Name: 'Mr C', Spent: '$30', Year: 2013}
+      ];
 
-      var arc = d3.svg.arc()
-      .outerRadius(radius - 10)
-      .innerRadius(0);
-
-      var pie = d3.layout.pie()
-      .sort(null)
-      .value(function(d) { return d.population; });
-
-      var svg = d3.select("body").append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-      d3.csv("/data/pie.csv", function(error, data) {
-
-        data.forEach(function(d) {
-          d.population = +d.population;
-        });
-
-        var g = svg.selectAll(".arc")
-        .data(pie(data))
-        .enter().append("g")
-        .attr("class", "arc");
-
-        g.append("path")
-        .attr("d", arc)
-        .style("fill", function(d) { return color(d.data.age); });
-
-        g.append("text")
-        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", ".35em")
-        .style("text-anchor", "middle")
-        .text(function(d) { return d.data.age; });
-
+      // normalize/parse data
+      spendData.forEach(function(d) {
+        d.Spent = d.Spent.match(/\d+/);
       });
+
+      // set crossfilter
+      var ndx = crossfilter(spendData),
+      yearDim  = ndx.dimension(function(d) {return +d.Year;}),
+      spendDim = ndx.dimension(function(d) {return Math.floor(d.Spent/10);}),
+      nameDim  = ndx.dimension(function(d) {return d.Name;}),
+      spendPerYear = yearDim.group().reduceSum(function(d) {return +d.Spent;}),
+      spendPerName = nameDim.group().reduceSum(function(d) {return +d.Spent;}),
+      spendHist    = spendDim.group().reduceCount();
+
+      yearRingChart
+      .width(200).height(200)
+      .dimension(yearDim)
+      .group(spendPerYear)
+      .innerRadius(50);
+
+      spendHistChart
+      .width(300).height(200)
+      .dimension(spendDim)
+      .group(spendHist)
+      .x(d3.scale.linear().domain([0,10]))
+      .elasticY(true);
+
+      spendHistChart.xAxis().tickFormat(function(d) {return d*10}); // convert back to base unit
+      spendHistChart.yAxis().ticks(2);
+
+      spenderRowChart
+      .width(350).height(200)
+      .dimension(nameDim)
+      .group(spendPerName)
+      .elasticX(true);
+
+      dc.renderAll();
     </script>
   </body>
 </html>
