@@ -6,8 +6,13 @@ nodejs rbit_runAll-rbitq.js
 # Install / Setup
 ```
 git clone https://github.com/cdi1/Exercises
-cd into directory
+cd Exercises
 npm install (install dependencies)
+```
+
+# Run Selenium Scripts
+```
+node selenium-scripts/script1.js
 ```
 
 

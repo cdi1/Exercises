@@ -1,11 +1,16 @@
 var webdriverio = require('webdriverio');
 var client = webdriverio.remote({
   desiredCapabilities: {
-    browserName: 'firefox'
+    browserName: 'chrome'
   }
 });
 
 client
   .init()
-  .url('http://dnilabs.com/kontakt')
+  .url('http://www.dnilabs.com/dnilabs/kontakt/')
+  .setValue('#firstname', 'Daniel Krahofer')
+  .setValue('#email', 'office@dnilabs.com')
+  .setValue('#message', 'Nachricht')
+  .submitForm('#mailform')
+  .pause(5000)
   .end();
