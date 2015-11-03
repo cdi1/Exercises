@@ -1,7 +1,7 @@
 var webdriverio = require('webdriverio');
 var client = webdriverio.remote({
   desiredCapabilities: {
-    browserName: 'chrome'
+    browserName: 'firefox'
   }
 });
 
