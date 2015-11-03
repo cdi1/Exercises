@@ -1,0 +1,27 @@
+{
+  "name": "exercises",
+  "version": "1.0.0",
+  "description": "Unsere gemeinesames übungsprojekt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdi1/Exercises.git"
+  },
+  "keywords": [
+    "testing",
+    "selenium",
+    "übung"
+  ],
+  "author": "Armin Hattmannsdorfer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdi1/Exercises/issues"
+  },
+  "homepage": "https://github.com/cdi1/Exercises#readme",
+  "dependencies": {
+    "webdriverio": "^3.2.6"
+  }
+}
