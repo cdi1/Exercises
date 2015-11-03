@@ -4,9 +4,11 @@ Aufruf von Selenium Script nodejs (CHM)
 nodejs rbit_runAll-rbitq.js
 
 # Install / Setup
-* git clone https://github.com/cdi1/Exercises
-* cd into directory
-* npm install (install dependencies)
+```
+git clone https://github.com/cdi1/Exercises
+cd into directory
+npm install (install dependencies)
+```
 
 
 # GIT
