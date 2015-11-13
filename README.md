@@ -1,5 +1,4 @@
 # Exercises
-Start Selenium Server (Download)
 Aufruf von Selenium Script nodejs (CHM)
 nodejs rbit_runAll-rbitq.js
 
@@ -37,3 +36,5 @@ git add -A
 git commit -am "meine commit nachricht"
 git push
 ```
+# Beispieländerung
+Text
