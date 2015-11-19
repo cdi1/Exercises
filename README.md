@@ -6,7 +6,13 @@ nodejs rbit_runAll-rbitq.js
 ```
 git clone https://github.com/cdi1/Exercises
 cd Exercises
-npm install (install dependencies)
+npm install
+```
+npm install is for downloading dependencies for your local repo clone (/node_modules/) folder
+
+# Install new module + save in package.json
+```
+npm i --save d3
 ```
 
 # Run Selenium Scripts
